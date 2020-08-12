@@ -5,7 +5,7 @@ import Autowhatever from './Autowhatever';
 import { defaultTheme, mapToAutowhateverTheme } from './theme';
 
 const alwaysTrue = () => true;
-const defaultShouldRenderSuggestions = (value) => value.trim().length > 0;
+const defaultShouldRenderSuggestions = (value) => value && value.trim().length > 0;
 const defaultRenderSuggestionsContainer = ({ containerProps, children }) => (
   <div {...containerProps}>{children}</div>
 );
@@ -494,8 +494,9 @@ export default class Autosuggest extends Component {
     const { inputProps } = this.props;
     const { value } = inputProps;
     const { valueBeforeUpDown } = this.state;
+    var aux = valueBeforeUpDown === null ? value : valueBeforeUpDown
 
-    return (valueBeforeUpDown === null ? value : valueBeforeUpDown).trim();
+    return aux && aux.trim();
   }
 
   renderSuggestionsContainer = ({ containerProps, children }) => {
